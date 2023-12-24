@@ -9,7 +9,7 @@ module.exports.isLoggedIn = (req, res, next) => {
         req.session.redirectUrl = req.originalUrl;
 
         req.flash("error", "you must be logged in to create listing!");
-        return res.redirect("/login");
+        return res.redirect("/account/login");
     }
     next();
 };
@@ -46,7 +46,7 @@ module.exports.checkListing = async (req, res, next) => {
     let listing = await Listing.findById(id);
     if (!listing) {
         req.flash("error", "listing not exist! ");
-        res.redirect("/listing");
+        res.redirect("/");
     }
     next();
 };

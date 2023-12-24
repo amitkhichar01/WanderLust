@@ -2,8 +2,6 @@ if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
 
-console.log(process.env.CLOUD_NAME);
-
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -20,6 +18,8 @@ const userRouter = require("./routes/user.js");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const wrapAsync = require("./utils/wrapAsync.js");
+const Listing = require("./models/listing");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -84,9 +84,31 @@ main()
         console.log("server");
     });
 
+app.get(
+    "/",
+    wrapAsync(async (req, res) => {
+        const allListings = await Listing.find({});
+        res.render("listings/listing.ejs", { allListings });
+    })
+);
+
+app.get(
+    "/privacy",
+    wrapAsync(async (req, res) => {
+        res.render("listings/privacy.ejs");
+    })
+);
+
+app.get(
+    "/terms",
+    wrapAsync(async (req, res) => {
+        res.render("listings/terms.ejs");
+    })
+);
+
 app.use("/listing", listingRouter);
 app.use("/listing/:id/reviews", reviewRouter);
-app.use("/", userRouter);
+app.use("/account", userRouter);
 
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page not found"));

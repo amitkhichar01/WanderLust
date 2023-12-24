@@ -1,7 +1,22 @@
 const Listing = require("../models/listing");
 
-module.exports.index = async (req, res) => {
-    const allListings = await Listing.find({});
+module.exports.renderFarm = async (req, res) => {
+    const allListings = await Listing.find({ category: "farm" });
+    res.render("listings/listing.ejs", { allListings });
+};
+
+module.exports.renderBeachfront = async (req, res) => {
+    const allListings = await Listing.find({ category: "beachfront" });
+    res.render("listings/listing.ejs", { allListings });
+};
+
+module.exports.renderCabin = async (req, res) => {
+    const allListings = await Listing.find({ category: "cabin" });
+    res.render("listings/listing.ejs", { allListings });
+};
+
+module.exports.renderLakefront = async (req, res) => {
+    const allListings = await Listing.find({ category: "lakefront" });
     res.render("listings/listing.ejs", { allListings });
 };
 
@@ -30,14 +45,15 @@ module.exports.createListing = async (req, res, next) => {
     newListing.image = { url, filename };
     await newListing.save();
     req.flash("success", "new listing Created!");
-    res.redirect("/listing");
+    res.redirect("/");
 };
 
 module.exports.renderEditForm = async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
     let originalImageUrl = listing.image.url;
-    originalImageUrl = originalImageUrl.replace("/upload", "/upload/w_200");
+    originalImageUrl = originalImageUrl.replace(/w=\d+/, "w=100").replace(/q=\d+/, "q=50");
+    // originalImageUrl = originalImageUrl.replace("/upload", "/upload/w_200");
     res.render("listings/edit.ejs", { listing, originalImageUrl });
 };
 
@@ -51,7 +67,7 @@ module.exports.updateListing = async (req, res) => {
     let listing = await Listing.findByIdAndUpdate(id, {
         ...req.body.listing,
     });
-    if (req.file !== "undefined") {
+    if (req.file && req.file.path) {
         let url = req.file.path;
         let filename = req.file.filename;
         listing.image = { url, filename };
@@ -68,5 +84,5 @@ module.exports.destroyListing = async (req, res) => {
     await Listing.findByIdAndDelete(id);
     req.flash("success", "Listing deleted");
 
-    res.redirect("/listing");
+    res.redirect("/");
 };

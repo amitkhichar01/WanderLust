@@ -1,28 +1,55 @@
-<% layout("./layouts/boilerplate.ejs") %>
-<body>
-    <div id="filters">
-        <div class="filter"></div>
-    </div>
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-        <%for(let item of allListings) { %>
-        <a href="/listing/<%= item.id%>" class="listing-link">
-            <div class="card opactiy listing-card">
-                <img
-                    class="card-img-top"
-                    src="<%= item.image.url%>"
-                    alt="Card image cap"
-                />
-                <div class="card-body">
-                    <b><p class="card-text"><%= item.title %></p></b>
-                    <% if (item.price !== undefined && item.price !== null) { %>
-                    <p>
-                        &#8377; <%= item.price.toLocaleString("en-IN") %> /
-                        night
-                    </p>
-                    <% }%>
-                </div>
-            </div>
+<% layout("./layouts/boilerplate.ejs") %><% pageTitle = "WanderLust" %>
+
+<div class="filters d-flex justify-content-center flex-wrap">
+    <div class="filter mx-5">
+        <a href="/listing/farm">
+            <img
+                src="https://a0.muscache.com/pictures/aaa02c2d-9f0d-4c41-878a-68c12ec6c6bd.jpg"
+                alt="Farms Image"
+            />
+            <p>Farms</p>
         </a>
-        <%}%>
     </div>
-</body>
+    <div class="filter mx-5">
+        <a href="/listing/beachfront">
+            <img
+                src="https://a0.muscache.com/pictures/bcd1adc0-5cee-4d7a-85ec-f6730b0f8d0c.jpg"
+                alt="Beachfront Image"
+            />
+            <p>Beachfront</p>
+        </a>
+    </div>
+    <div class="filter mx-5">
+        <a href="/listing/cabin">
+            <img
+                src="https://a0.muscache.com/pictures/732edad8-3ae0-49a8-a451-29a8010dcc0c.jpg"
+                alt="Cabins Image"
+            />
+            <p>Cabins</p>
+        </a>
+    </div>
+    <div class="filter mx-5">
+        <a href="/listing/lakefront">
+            <img
+                src="https://a0.muscache.com/pictures/9a2ca4df-ee90-4063-b15d-0de7e4ce210a.jpg"
+                alt="Off-the-grid Image"
+            />
+            <p>Lakefront</p>
+        </a>
+    </div>
+</div>
+<div class="row mx-3 justify-content-evenly">
+    <%for(let listing of allListings) { %>
+    <a href="/listing/<%= listing.id%>" class="listing-link">
+        <div class="col card listing-card listing-card-shadow">
+            <img class="card-img-top" src="<%= listing.image.url%>" alt="Card image cap" />
+            <div class="card-body">
+                <p class="card-text fw-semibold"><%= listing.title %></p>
+                <% if (listing.price !== undefined && listing.price !== null) { %>
+                <p>&#8377; <%= listing.price.toLocaleString("en-IN") %> / night</p>
+                <% }%>
+            </div>
+        </div>
+    </a>
+    <%}%>
+</div>

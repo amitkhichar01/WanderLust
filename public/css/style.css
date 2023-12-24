@@ -1,22 +1,53 @@
 body {
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Montserrat", sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
     position: relative;
+    background-color: #ecf0f3;
 }
 
 .navbar {
-    height: 5rem;
+    height: 3.5rem;
+    margin-bottom: 1rem !important;
     background-color: white;
-    margin-bottom: 3vh !important;
 }
 
-.fa-compass {
-    color: #fe424d;
+.search-btn {
+    border: 2px solid #ff385c !important;
+    font-size: 1rem;
+}
+
+.search-btn:hover {
+    background-color: #ff385c !important;
 }
 
 .nav-link {
     color: #222222 !important;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.3rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.5s ease-in-out;
+}
+
+.filter:hover {
+    opacity: 1;
+}
+
+.filter a {
+    text-decoration: none;
+    color: black;
+}
+
+.filter img {
+    width: 1.5rem;
 }
 
 footer {
@@ -25,18 +56,13 @@ footer {
     width: 100%;
 }
 
-.f-info-links {
-    text-decoration: none;
-    color: #222222;
-}
-
-.f-info-links:hover {
-    text-decoration: underline;
-}
-
-.f-info-links {
-    width: 100%;
-    margin-bottom: 2rem;
+.f-info {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 8rem;
 }
 
 .f-info-socials i {
@@ -48,31 +74,38 @@ footer {
     width: 100%;
 }
 
-.f-info {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    height: 8rem;
-    background-color: #ebebeb;
+.f-info-links a {
+    text-decoration: none;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links {
+    width: 100%;
+    margin-bottom: 2rem;
 }
 
 .listing-card {
     border: none !important;
     margin-bottom: 2rem;
     width: 100%;
+    min-height: 25rem;
     display: block;
+    background-color: transparent;
+    transition: all 0.2s ease;
+    box-shadow: 0px 0px 1px black;
 }
 
-.opactiy:hover {
-    opacity: 0.8;
+.listing-card-shadow:hover {
+    box-shadow: 0px 0px 5px black;
 }
 
 .card-img-top {
-    border-radius: 1rem !important;
     width: 100% !important;
     object-fit: cover !important;
+    object-position: center;
     height: 18rem !important;
 }
 
@@ -87,11 +120,100 @@ footer {
 .listing-link {
     text-decoration: none;
     cursor: pointer;
-    width: 19rem !important;
+    width: 21rem;
 }
 
 .btn-dark {
     background-color: #fe424d !important;
     border: none !important;
     margin-bottom: 2rem;
+}
+
+#map {
+    box-shadow: 0px 0px 2px black;
+}
+
+@media (max-width: 800px) {
+    .nav-search {
+        display: none;
+    }
+
+    .show-container {
+        width: 94%;
+        margin: 0.5rem;
+    }
+
+    .map-container {
+        margin: 0.5rem;
+    }
+
+    #map {
+        width: 60vw !important;
+    }
+
+    .reviews-box {
+        width: 100%;
+        margin: 1rem 0 !important;
+    }
+}
+
+@media (max-width: 550px) {
+    .filter {
+        margin: 0 1.5rem !important;
+    }
+
+    #map {
+        width: 95vw !important;
+    }
+
+    .review-container {
+        width: 90%;
+        margin: 1rem;
+    }
+
+    .new-listing-container {
+        width: 100%;
+        margin: 0 0 0 0.5rem !important;
+        padding: 0.5rem !important;
+    }
+
+    .edit-listing-container {
+        width: 100%;
+        margin: 0 !important;
+        padding: 0.5rem !important;
+    }
+
+    .flash-msg {
+        width: 100%;
+        margin: 0 0 1rem !important;
+        padding: 0.5rem;
+    }
+
+    .btn-close {
+        padding: 0.8rem !important;
+    }
+
+    .privacy-content,
+    .terms-container {
+        width: 100%;
+    }
+
+    .signup-container {
+        width: 100%;
+        margin: 0 !important;
+    }
+
+    .login-heading,
+    .signup-heading {
+        width: 100%;
+        margin: 1rem 0 !important;
+        padding: 0 !important;
+        text-align: center;
+    }
+
+    .login-container {
+        width: 100%;
+        margin: 0 !important;
+        padding: 1rem 0 1rem 1.5rem !important;
+    }
 }
