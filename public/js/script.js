@@ -21,6 +21,20 @@
     });
 })();
 
+
+const flashMsg = document.querySelector(".alert");
+console.log(flashMsg);
+
+if (flashMsg) {
+    setTimeout(() => {
+        flashMsg.style.display = "none";
+    }, 10000);
+
+    flashMsg.addEventListener("click", () => {
+        flashMsg.style.display = "none";
+    });
+}
+
 let center = [75.4022, 28.1317];
 const map = tt.map({
     key: mapToken,
@@ -32,14 +46,3 @@ map.on("load", () => {
     new tt.Marker().setLngLat(center).addTo(map);
 });
 
-const flashMsg = document.querySelector(".alert");
-console.log(flashMsg);
-if (flashMsg) {
-    setTimeout(() => {
-        flashMsg.style.display = "none";
-    }, 10000);
-
-    flashMsg.addEventListener("click", () => {
-        flashMsg.style.display = "none";
-    });
-}
