@@ -1,3 +1,8 @@
-.env
+# Ignore Node.js modules
 node_modules/
+
+# Ignore the .env file
+.env
+
+# Ignore the init folder
 init
