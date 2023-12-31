@@ -34,6 +34,9 @@ module.exports.renderLoginForm = (req, res) => {
 module.exports.login = async (req, res) => {
     req.flash("success", "welcome to Wanderlust!");
     let redirectUrl = res.locals.redirectUrl || "/";
+    redirectUrl = redirectUrl.replace(/\/reviews(?:\/.*)?$/, "");
+    console.log(redirectUrl);
+    
     res.redirect(redirectUrl);
 };
 

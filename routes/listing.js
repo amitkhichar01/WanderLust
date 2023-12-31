@@ -9,7 +9,7 @@ const { storage } = require("../cloudConfig.js");
 
 const upload = multer({ storage });
 
-router.post(
+router.post("/",
     isLoggedIn,
     upload.single("listing[image]"),
     validateListing,

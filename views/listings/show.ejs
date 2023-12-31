@@ -9,19 +9,11 @@
         <div class="card col-8 listing-card fw-medium">
             <img class="card-img-top" src="<%= listing.image.url%>" alt="Card image cap" />
             <div class="card-body">
-                <p class="card-text">
-                    <span class="fw-semibold">Hosted by </span
-                    ><span class="text-primary"><%= listing.owner.username%></span>
-                </p>
-                <p class="card-text">
-                    <i class="fa-solid fa-location-dot"></i> <%= listing.location%>, <%=
-                    listing.country%>
-                </p>
+                <p class="card-text"><span class="fw-semibold">Hosted by </span><span class="text-primary"><%= listing.owner.username%></span></p>
+                <p class="card-text"><i class="fa-solid fa-location-dot"></i> <%= listing.location%>, <%= listing.country%></p>
                 <p class="card-text"><%= listing.description%></p>
                 <% if (listing.price !== undefined && listing.price !== null) { %>
-                <p class="card-text">
-                    &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
-                </p>
+                <p class="card-text">&#8377; <%= listing.price.toLocaleString("en-IN") %> / night</p>
                 <% }%>
             </div>
         </div>
@@ -29,16 +21,12 @@
         <div class="row mb-2">
             <div class="col-4">
                 <form action="/listing/<%= listing._id %>/edit" method="get">
-                    <button class="btn btn-success">
-                        <i class="fa-regular fa-pen-to-square"></i> edit
-                    </button>
+                    <button class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i> edit</button>
                 </form>
             </div>
             <div class="col-6">
                 <form action="/listing/<%= listing._id %>?_method=DELETE" method="post">
-                    <button class="btn btn-danger opacity-75">
-                        <i class="fa-solid fa-trash"></i> delete
-                    </button>
+                    <button class="btn btn-danger opacity-75"><i class="fa-solid fa-trash"></i> delete</button>
                 </form>
             </div>
         </div>
@@ -50,28 +38,14 @@
     </div>
 
     <div class="col-8 offset-2 mb-3 mt-4 review-container">
-        <%if(currentUser) {%>
 
         <h4>Leave a Review</h4>
 
-        <form
-            action="/listing/<%= listing._id  %>/reviews"
-            method="post"
-            novalidate
-            class="needs-validation"
-        >
+        <form action="/listing/<%= listing._id  %>/reviews" method="post" novalidate class="needs-validation">
             <div class="mt-4">
                 <label for="rating" class="form-label">Rating</label>
                 <fieldset class="starability-checkmark">
-                    <input
-                        type="radio"
-                        id="no-rate"
-                        class="input-no-rate"
-                        name="review[rating]"
-                        value="1"
-                        checked
-                        aria-label="No rating."
-                    />
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
                     <input type="radio" id="first-rate1" name="rating" value="1" />
                     <label for="first-rate1" title="Terrible">1 star</label>
                     <input type="radio" id="first-rate2" name="review[rating]" value="2" />
@@ -87,19 +61,12 @@
 
             <div class="mb-3">
                 <label for="comment" class="form-label">Comments</label>
-                <textarea
-                    name="review[comment]"
-                    id="comment"
-                    cols="25"
-                    rows="5"
-                    class="form-control"
-                    required
-                ></textarea>
+                <textarea name="review[comment]" id="comment" cols="25" rows="5" class="form-control" required></textarea>
                 <div class="invalid-feedback">Please add comments for review</div>
             </div>
             <button class="btn btn-primary">Submit</button>
         </form>
-        <%}%> <%if(listing.reviews.length>0) {%>
+        <%if(listing.reviews.length>0) {%>
         <div class="row mt-5 m-0">
             <h4><b>All Reviews</b></h4>
             <% for(review of listing.reviews) {%>
@@ -109,10 +76,7 @@
                     <p class="starability-result card-text" data-rating="<%= review.rating%>"></p>
                     <p class="card-text"><%= review.comment%></p>
 
-                    <form
-                        action="/listing/<%= listing._id%>/reviews/<%= review._id%>?_method=delete"
-                        method="POST"
-                    >
+                    <form action="/listing/<%= listing._id%>/reviews/<%= review._id%>?_method=delete" method="POST">
                         <button class="btn btn-danger mt-3">delete</button>
                     </form>
                 </div>

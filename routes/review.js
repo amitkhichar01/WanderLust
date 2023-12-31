@@ -9,7 +9,6 @@ const {
 
 const reviewController = require("../controllers/review.js");
 
-// Reviews
 // Post Route
 router.post(
     "/",

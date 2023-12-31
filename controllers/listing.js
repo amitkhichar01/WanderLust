@@ -20,10 +20,6 @@ module.exports.renderLakefront = async (req, res) => {
     res.render("listings/listing.ejs", { allListings });
 };
 
-module.exports.renderNewForm = (req, res) => {
-    res.render("listings/new.ejs");
-};
-
 module.exports.showListing = async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id)
@@ -35,6 +31,10 @@ module.exports.showListing = async (req, res) => {
         })
         .populate("owner");
     res.render("listings/show.ejs", { listing });
+};
+
+module.exports.renderNewForm = (req, res) => {
+    res.render("listings/new.ejs");
 };
 
 module.exports.createListing = async (req, res, next) => {
